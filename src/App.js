@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route} from "react-router-dom"
+
+import Container from "@material-ui/core/Container"
+
+import Navbar from "./components/navbar.component"
+import ListTable from "./components/list-table.component"
+import NewList from "./components/new-list.component"
+import ManageCatalog from "./components/manage-catalog.component"
+import {ListsProvider} from "./contexts/lists.context"
+import {CatalogProvider} from "./contexts/catalog.context"
 
 function App() {
   return (
+    <Container maxWidth="md">
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+      <ListsProvider>
+        <CatalogProvider>
+        <Navbar />
+        <Route path='/' exact component={ListTable}/>
+        <Route path='/newlist' component={NewList} />
+        <Route path='/managecatalog' component={ManageCatalog} />
+        </CatalogProvider>
+        </ListsProvider>
+      </BrowserRouter>
     </div>
+    </Container>
   );
 }
 

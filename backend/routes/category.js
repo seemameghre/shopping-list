@@ -5,8 +5,8 @@ const Category = require("../models/category.model")
 router.route('/:username')
     .get((req, res) => {
         Category.find({username:req.params.username})
-            .then((categories) => res.json(categories))
-            .catch(err => res.status(400).json('Error: '+err))
+            .then((categories) => res.json({data:categories, success: true, count: categories.length}))
+            .catch(err => res.status(400).json({success:false, error: err}))
     })
 router.route('/id/:categoryid')
     .get((req,res) => {
