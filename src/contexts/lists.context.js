@@ -9,9 +9,6 @@ import reducer from "../reducers/lists.reducer"
 
 export const ListsContext = createContext()
 
-// const defaultList = [
-//     {description: "Sample list", shoppingdate: new Date(), createddate: new Date() }
-// ]
 const initialState = {
     lists: [],
     error: null,
@@ -54,6 +51,7 @@ export function ListsProvider(props){
             })
     }
     function addList(list){
+        
         axios.post(LIST_API_URL+"seema/add", list)
             .then(res => {
                 dispatch({

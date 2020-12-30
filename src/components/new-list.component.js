@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react'
 import {ListsContext} from "../contexts/lists.context"
 import Catalog from "./catalog.component"
+import ListPreview from './listpreview.component'
 
 function NewList(props){
     const {addList} = useContext(ListsContext)
 
-    const [description, setDescription] = useState('')
+    const [description, setDescription] = useState('Grocery List')
+    const [selectedItems, setSelectedItems] = useState([])
 
     function handleSubmit(e){
         e.preventDefault()
@@ -13,10 +15,14 @@ function NewList(props){
         const newList = {
             // username:"seema",
             description:description,
-            shoppingdate: new Date()
+            shoppingdate: new Date(),
+            items: selectedItems
         }
         addList(newList)
         window.location = "/"
+    }
+    function addItem(newItem){
+        setSelectedItems([...selectedItems, newItem])
     }
     return(
         <>
@@ -32,7 +38,8 @@ function NewList(props){
             <label>Shopping Date</label>
             <button>Add List</button>
         </form>
-        <Catalog />
+        <Catalog addItem={addItem} />
+        <ListPreview description={description} selectedItems={selectedItems} />
         </>
     )
 
