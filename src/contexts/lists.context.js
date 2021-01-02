@@ -19,8 +19,8 @@ const LIST_API_URL = "http://localhost:5000/lists/"
 export function ListsProvider(props){
     const [state, dispatch] = useReducer(reducer, initialState)
     
-    function getLists(){
-        axios.get(LIST_API_URL+"seema")
+    async function getLists(){
+        await axios.get(LIST_API_URL+"seema")
             .then(res => {
                 dispatch({
                     type: "GET_LISTS",
@@ -31,12 +31,12 @@ export function ListsProvider(props){
             .catch(err => {
                 dispatch({
                     type: "LISTS_ERROR",
-                    payload: err
+                    payload: err.message
                 })
             })
     }
-    function deleteList(listId){
-        axios.delete(LIST_API_URL+`id/${listId}`)
+    async function deleteList(listId){
+        await axios.delete(LIST_API_URL+`id/${listId}`)
             .then(res => {
                 dispatch({
                     type: "REMOVE",
@@ -46,13 +46,12 @@ export function ListsProvider(props){
             .catch(err => {
                 dispatch({
                     type: "LISTS_ERROR",
-                    payload: err
+                    payload: err.message
                 })
             })
     }
-    function addList(list){
-        
-        axios.post(LIST_API_URL+"seema/add", list)
+    async function addList(list){
+        await axios.post(LIST_API_URL+"seema/add", list)
             .then(res => {
                 dispatch({
                     type: "ADD",
@@ -62,7 +61,7 @@ export function ListsProvider(props){
             .catch(err => {
                 dispatch({
                     type: "LISTS_ERROR",
-                    payload: err
+                    payload: err.message
                 })
             })
     }

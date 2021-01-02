@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
 import {ListsContext} from "../contexts/lists.context"
 import Catalog from "./catalog.component"
-import ListPreview from './listpreview.component'
+import ListPreview from "./list-preview.component"
+
 
 function NewList(props){
-    const {addList} = useContext(ListsContext)
+    const {addList, error} = useContext(ListsContext)
 
     const [description, setDescription] = useState('Grocery List')
     const [selectedItems, setSelectedItems] = useState([])
@@ -13,7 +14,6 @@ function NewList(props){
         e.preventDefault()
 
         const newList = {
-            // username:"seema",
             description:description,
             shoppingdate: new Date(),
             items: selectedItems
@@ -23,6 +23,9 @@ function NewList(props){
     }
     function addItem(newItem){
         setSelectedItems([...selectedItems, newItem])
+    }
+    if(error){
+        return(<h3>{error}</h3>)
     }
     return(
         <>

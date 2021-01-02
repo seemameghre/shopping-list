@@ -18,6 +18,8 @@ function Item(props){
             quantity,
             note
         })
+        resetQuantity()
+        resetNote()
     }
     return(
         <>
@@ -25,7 +27,7 @@ function Item(props){
                 <input type="checkbox" value={itemname} onChange={handleCheckbox}/>
                 <label htmlFor="{itemname}">{itemname}</label>
                 <input type="text" placeholder="Quantity" size="4" name="quantity" value={quantity} onChange={e => setQuantity(e)} disabled={!selected} />
-                <input type="text" placeholder="Note" name="note" value={note} onChange={e => setNote(e)} disabled={!selected} />
+                <input type="text" placeholder="Note" size="8" name="note" value={note} onChange={e => setNote(e)} disabled={!selected} />
                 <button>+</button>
             </form>
         </>

@@ -1,25 +1,23 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 
-import {ListsContext} from "../contexts/lists.context"
 import ListRow from "./listrow.component"
 
 function ListTable(props){
-    const {lists, getLists, error, loading} = useContext(ListsContext)
-
-    useEffect(() => {
-        getLists()
-    },[])
+    const {lists, loading} = props
     
     return (
-        <>
-            {error}
+        <table>
             <thead>
+                <tr>
                 <th>Description</th>
                 <th>Shopping Date</th>
                 <th>Actions</th>
+                </tr>
             </thead>
-            {loading ? <h3>Loading</h3> : lists.map(list => <ListRow list={list} key={list._id}/>)}
-        </>
+            <tbody>
+            {loading ? <tr><td>Loading</td></tr> : lists.map(list => <ListRow list={list} key={list._id}/>)}
+            </tbody>
+        </table>
     )
 }
 export default ListTable;

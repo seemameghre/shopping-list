@@ -6,7 +6,7 @@ function Category({categoryname, items, addItem}){
     return(
         <div>
             <h5>{categoryname}</h5>
-            {items.map(item => <Item name={item} addItem={addItem}/>)}
+            {items.map(item => <Item key={item} name={item} addItem={addItem}/>)}
         </div>
     )
 }
@@ -20,7 +20,7 @@ function Catalog(props){
     return(
         <div>
             <h3>Categories:</h3>
-            {catalog.map(category => <Category {...category} addItem={props.addItem} />)}
+            {catalog.map(category => <Category key={category._id} {...category} addItem={props.addItem} />)}
         </div>
     )
 }

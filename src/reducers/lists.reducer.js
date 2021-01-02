@@ -13,7 +13,7 @@ const reducer = (state, action) => {
                 list.id === action.id ? action.payload : list
               )};
         case "LISTS_ERROR":
-            return { ...state, error: action.error}
+            return { ...state, error: action.payload}
         default:
             return state
     }
