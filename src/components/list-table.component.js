@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
+import {ListsContext} from "../contexts/lists.context"
 import ListRow from "./listrow.component"
 
 function ListTable(props){
-    const {lists, loading} = props
+    // const {lists, loading} = props
+    const {lists, loading} = useContext(ListsContext)
     
     return (
         <table>

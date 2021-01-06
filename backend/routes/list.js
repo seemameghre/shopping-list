@@ -32,7 +32,6 @@ router.route('/:username/add')
             shoppingdate: shoppingdate,
             items:items
         })
-        console.log(list)
         list.save()
             .then(() => res.json({success: true, data: list}))
             .catch(err => res.status(400).json('Error: '+err))

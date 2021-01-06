@@ -3,7 +3,6 @@ import {ListsContext} from "../contexts/lists.context"
 import Catalog from "./catalog.component"
 import ListPreview from "./list-preview.component"
 
-
 function NewList(props){
     const {addList, error} = useContext(ListsContext)
 
@@ -39,7 +38,7 @@ function NewList(props){
                 onChange={(e) => setDescription(e.target.value)} 
             />
             <label>Shopping Date</label>
-            <button>Add List</button>
+            <button>Save List</button>
         </form>
         <Catalog addItem={addItem} />
         <ListPreview description={description} selectedItems={selectedItems} />
@@ -48,5 +47,3 @@ function NewList(props){
 
 }
 export default NewList
-
-

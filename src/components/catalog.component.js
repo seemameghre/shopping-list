@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react"
+import {useContext} from "react"
 import { CatalogContext } from "../contexts/catalog.context"
 import Item from "./item.component"
 
@@ -12,11 +12,8 @@ function Category({categoryname, items, addItem}){
 }
 
 function Catalog(props){
-    const {catalog, getCatalog} = useContext(CatalogContext)
+    const {catalog} = useContext(CatalogContext)
    
-    useEffect(() => {
-        getCatalog()
-    },[])
     return(
         <div>
             <h3>Categories:</h3>

@@ -30,10 +30,58 @@ export function CatalogProvider(props){
                 })
             })
     }
+    function addCategory(newCategory){
+        axios.post(CATALOG_API+"seema/add", newCategory)
+            .then(res => {
+                dispatch({
+                    type:"ADD_CATEGORY",
+                    payload: res.data.data
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: "CATALOG_ERR",
+                    payload: err
+                })
+            })
+    }
+    async function deleteCategory(categoryId){
+        await axios.delete(CATALOG_API+`id/${categoryId}`)
+            .then(res => {
+                dispatch({
+                    type: "REMOVE",
+                    payload: categoryId
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: "CATALOG_ERR",
+                    payload: err.message
+                })
+            })
+    }
+    async function updateCategory(updatedCategory){
+        await axios.post(CATALOG_API+`update/${updatedCategory._id}`, updatedCategory)
+        .then(res => {
+            dispatch({
+                type: "UPDATE_CATEGORY",
+                payload: updatedCategory
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: "CATALOG_ERR",
+                payload: err.message
+            })
+        })
+    }
     return(
         <CatalogContext.Provider value={{
             catalog:state.catalog,
-            getCatalog
+            getCatalog,
+            addCategory,
+            deleteCategory,
+            updateCategory
         }}>
             {props.children}
         </CatalogContext.Provider>

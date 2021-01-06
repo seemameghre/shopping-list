@@ -28,7 +28,7 @@ function Item(props){
                 <label htmlFor="{itemname}">{itemname}</label>
                 <input type="text" placeholder="Quantity" size="4" name="quantity" value={quantity} onChange={e => setQuantity(e)} disabled={!selected} />
                 <input type="text" placeholder="Note" size="8" name="note" value={note} onChange={e => setNote(e)} disabled={!selected} />
-                <button>+</button>
+                <button disabled={!selected}>+</button>
             </form>
         </>
     )
