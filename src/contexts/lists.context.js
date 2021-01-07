@@ -1,6 +1,6 @@
-//ListContext provides the lists for a user and 
-//functions that make backend calls. 
-//These functions also call dispatch function of reducer to update front end state
+/* ListContext maintains the lists for a user 
+  and provides functions that make backend calls to get and update lists.
+  These functions also call reducer dispatch to update front end state */
 
 import {createContext, useReducer} from "react"
 import axios from "axios"

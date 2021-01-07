@@ -1,5 +1,8 @@
-import {useReducer, createContext} from "react"
+/* CatalogContext maintains the catalog for a user 
+  and provides functions that make backend calls to get and update catalog.
+  These functions also call reducer dispatch to update front end catalog state */
 
+import {useReducer, createContext} from "react"
 import axios from "axios"
 
 import reducer from "../reducers/category.reducer"

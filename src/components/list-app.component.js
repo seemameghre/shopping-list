@@ -1,3 +1,6 @@
+/* This is starting component.
+    It calls context get functions to load lists and catalog,
+    and defines routes */
 import React, {useContext, useEffect} from 'react'
 import {BrowserRouter, Route} from "react-router-dom"
 import Navbar from "./navbar.component"
@@ -9,20 +12,22 @@ import {ListsContext} from "../contexts/lists.context"
 import {CatalogContext} from "../contexts/catalog.context"
 
 export default function ListApp(props) {
-    const {getLists, error} = useContext(ListsContext)
+    const {getLists, error: listError} = useContext(ListsContext)
 
     useEffect(() => {
         getLists()
     },[])
 
-    const {getCatalog} = useContext(CatalogContext)
+    const {getCatalog, error:catalogError} = useContext(CatalogContext)
    
     useEffect(() => {
         getCatalog()
     },[])
 
-    if(error){
-        return(<h3>{error}</h3>)
+    if(listError){
+        return(<h3>{listError}</h3>)
+    }else if(catalogError){
+        return(<h3>{catalogError}</h3>)
     }
     
     return (
@@ -33,9 +38,6 @@ export default function ListApp(props) {
                 <Route path='/newlist' render={() => <NewList />} />
                 <Route path="/viewlist/:listId" render={(routeProps) => <ListView listId={routeProps.match.params.listId}/>} />
                 <Route path='/managecatalog' component={ManageCatalog} />
-                {/* <Route 
-                path="/categories/:categoryId" 
-                render={(routeProps) => <ManageItems categoryId={routeProps.match.params.categoryId} />} /> */}
             </BrowserRouter>
         </div>
     )

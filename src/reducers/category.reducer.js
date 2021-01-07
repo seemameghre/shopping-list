@@ -1,4 +1,5 @@
-
+/* This reducer function updates the catalog state 
+ It is called after db updates or get requests */
 export default function reducer(state, action){
     switch(action.type){
         case "GET_CATALOG":

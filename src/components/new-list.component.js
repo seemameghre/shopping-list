@@ -2,11 +2,14 @@ import React, { useContext, useState } from 'react'
 import {ListsContext} from "../contexts/lists.context"
 import Catalog from "./catalog.component"
 import ListPreview from "./list-preview.component"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
 
 function NewList(props){
     const {addList, error} = useContext(ListsContext)
 
     const [description, setDescription] = useState('Grocery List')
+    const [shoppingdate, setShoppingdate] = useState(new Date())
     const [selectedItems, setSelectedItems] = useState([])
 
     function handleSubmit(e){
@@ -14,7 +17,7 @@ function NewList(props){
 
         const newList = {
             description:description,
-            shoppingdate: new Date(),
+            shoppingdate,
             items: selectedItems
         }
         addList(newList)
@@ -38,6 +41,7 @@ function NewList(props){
                 onChange={(e) => setDescription(e.target.value)} 
             />
             <label>Shopping Date</label>
+            <DatePicker selected={shoppingdate} onChange={date => setShoppingdate(date)} />
             <button>Save List</button>
         </form>
         <Catalog addItem={addItem} />

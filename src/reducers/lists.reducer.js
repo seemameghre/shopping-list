@@ -1,5 +1,5 @@
-//this reducer function updates the lists state in front end
-//it is called after db call to reflect the changes
+/*this reducer function updates the lists state in front end
+it is called after db call to reflect the changes */
 const reducer = (state, action) => {
     switch(action.type){
         case "GET_LISTS":
