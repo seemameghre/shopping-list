@@ -1,38 +1,43 @@
 import React, {useContext} from 'react'
+import Table from "react-bootstrap/Table"
 import {ListsContext} from "../contexts/lists.context"
 
 function ListView(props) {
     
-    const {lists,loading} = useContext(ListsContext)
-
-    function findList(id){
-        return lists.find(list => list._id === id)
-    }
+    const {lists, loading} = useContext(ListsContext)
+ 
+    const currentList = lists.find(list => list._id === props.listId)
     
-    const currentList = findList(props.listId)
-    console.log(typeof currentList.shoppingdate)
     return (  
             <div>
-                {loading ? <h3>Loading</h3>:
-                    <div>
-                    <h3>{currentList.description}</h3>
-                    
-                    {/* <h5>Shopping Date: {currentList.shoppingdate.substring(0,10)}</h5> */}
-                    <h5>Shopping Date: {new Date(currentList.shoppingdate).toDateString()}</h5>
-                    <table>
+                {loading ? <h3>Loading</h3> :
+                <div>
+                    <Table size="sm" borderless striped variant="warning">                       
+                        <thead>
+                            <tr><th colSpan="3" className="text-center">{currentList.description}</th></tr>
+                            <tr><th colSpan="3" className="text-center">
+                                Shopping Date: {new Date(currentList.shoppingdate).toDateString()}
+                            </th></tr>
+                            <tr>
+                                <th className="text-center">Item</th>
+                                <th className="text-center">Quantity</th>
+                                <th className="text-center">Note</th>
+                            </tr>
+                        </thead>
+                        
                         <tbody>
-                    {currentList.items !== undefined && currentList.items.map(item => 
+                        {currentList.items !== undefined && currentList.items.map(item => 
                             (
                                 <tr key={item._id}>
-                                <td>{item.itemname}</td>
-                                <td>{item.quantity}</td>
-                                <td>{item.note}</td>
+                                <td className="text-center">{item.itemname}</td>
+                                <td className="text-right">{item.quantity}</td>
+                                <td className="text-left">{item.note}</td>
                                 </tr>)
                             )
                     }
                     </tbody>
-                    </table>
-                    </div>
+                    </Table>
+                </div>
                 }
             </div>
             )

@@ -1,25 +1,24 @@
 import React, {useContext} from 'react'
-
+import Table from "react-bootstrap/Table"
 import {ListsContext} from "../contexts/lists.context"
 import ListRow from "./listrow.component"
 
 function ListTable(props){
-    // const {lists, loading} = props
-    const {lists, loading} = useContext(ListsContext)
+    const {lists} = useContext(ListsContext)
     
     return (
-        <table>
+        <Table className="ml-auto mr-auto" borderless striped size="sm" >
             <thead>
                 <tr>
-                <th>Description</th>
-                <th>Shopping Date</th>
-                <th>Actions</th>
+                <th className="text-center">Description</th>
+                <th className="text-center">Shopping Date</th>
+                <th  className="text-center" colSpan="2">Actions</th>
                 </tr>
             </thead>
             <tbody>
-            {loading ? <tr><td>Loading</td></tr> : lists.map(list => <ListRow list={list} key={list._id}/>)}
+            {lists.map(list => <ListRow list={list} key={list._id}/>)}
             </tbody>
-        </table>
+        </Table>
     )
 }
 export default ListTable;

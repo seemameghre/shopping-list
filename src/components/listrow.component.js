@@ -1,4 +1,5 @@
 import React,{useContext} from "react"
+import Button from "react-bootstrap/Button"
 import { ListsContext } from "../contexts/lists.context"
 
 function ListRow(props){
@@ -9,11 +10,11 @@ function ListRow(props){
         window.location = `/viewlist/${_id}`
     }
     return(
-        <tr style={{padding:"10px"}}>
-            <td style={{padding:"10px"}}>{description}</td>
-            <td style={{padding:"10px"}}>{new Date(shoppingdate).toDateString()}</td>
-            <td><button onClick={() => deleteList(_id)}>Delete</button></td>
-            <td><button onClick={() => viewList()}>View</button></td>
+        <tr>
+            <td className="text-center align-bottom">{description}</td>
+            <td className="text-center align-bottom">{new Date(shoppingdate).toDateString()}</td>
+            <td className="text-center align-bottom"><Button variant="secondary" onClick={() => deleteList(_id)}>Delete</Button></td>
+            <td className="text-center align-bottom"><Button variant="secondary" onClick={() => viewList()}>View</Button></td>
         </tr>
     )
 }

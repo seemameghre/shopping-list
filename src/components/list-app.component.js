@@ -3,7 +3,9 @@
     and defines routes */
 import React, {useContext, useEffect} from 'react'
 import {BrowserRouter, Route} from "react-router-dom"
-import Navbar from "./navbar.component"
+import Container from "react-bootstrap/Container"
+
+import Topbar from "./navbar.component"
 import ListTable from "./list-table.component"
 import NewList from "./new-list.component"
 import ManageCatalog from "./manage-catalog.component"
@@ -33,11 +35,13 @@ export default function ListApp(props) {
     return (
         <div>
             <BrowserRouter>
-                <Navbar />
+            <Container style={{width:'40%'}}>
+                <Topbar />
                 <Route path='/' exact render={() => <ListTable />}/>
                 <Route path='/newlist' render={() => <NewList />} />
                 <Route path="/viewlist/:listId" render={(routeProps) => <ListView listId={routeProps.match.params.listId}/>} />
                 <Route path='/managecatalog' component={ManageCatalog} />
+            </Container>
             </BrowserRouter>
         </div>
     )

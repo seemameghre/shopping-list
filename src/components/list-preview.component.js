@@ -1,24 +1,32 @@
 import React from 'react'
+import Table from "react-bootstrap/Table"
 
 export default function ListPreview(props) {
-const {description, selectedItems} = props
+const {description, shoppingdate, selectedItems} = props
     return (
-        <div>
-            <h3>Preview</h3>
-            <h4>{description}</h4>
-            <table>
-                    <tbody>
-                    {selectedItems !== undefined && selectedItems.map(item => 
-                            (
-                                <tr key={item.itemname}>
-                                <td>{item.itemname}</td>
-                                <td>{item.quantity}</td>
-                                <td>{item.note}</td>
-                                </tr>)
-                            )
-                    }
-                    </tbody>
-                    </table>
-        </div>
+            <Table size="sm" borderless striped variant="warning">                       
+                <thead>
+                    <tr><th colSpan="3" className="text-center">{description}</th></tr>
+                    <tr><th colSpan="3" className="text-center">
+                        Shopping Date: {new Date(shoppingdate).toDateString()}
+                    </th></tr>
+                    <tr>
+                        <th className="text-center">Item</th>
+                        <th className="text-center">Quantity</th>
+                        <th className="text-center">Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {selectedItems !== undefined && selectedItems.map(item => 
+                    (
+                        <tr key={item._id}>
+                        <td className="text-center">{item.itemname}</td>
+                        <td className="text-right">{item.quantity}</td>
+                        <td className="text-left">{item.note}</td>
+                        </tr>)
+                    )
+            }
+            </tbody>
+            </Table>
     )
 }

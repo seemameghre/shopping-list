@@ -4,6 +4,11 @@ import Catalog from "./catalog.component"
 import ListPreview from "./list-preview.component"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
 
 function NewList(props){
     const {addList, error} = useContext(ListsContext)
@@ -30,24 +35,27 @@ function NewList(props){
         return(<h3>{error}</h3>)
     }
     return(
-        <>
-        <form onSubmit={handleSubmit}>
-            <h2>Add New List</h2>
-            <label htmlFor="description">Description</label>
-            <input 
-                type="text" 
-                name="description" 
-                value={description}
-                onChange={(e) => setDescription(e.target.value)} 
-            />
-            <label>Shopping Date</label>
-            <DatePicker selected={shoppingdate} onChange={date => setShoppingdate(date)} />
-            <button>Save List</button>
-        </form>
-        <Catalog addItem={addItem} />
-        <ListPreview description={description} selectedItems={selectedItems} />
-        </>
+        <Container>
+            <Row><Col>
+            <Form onSubmit={handleSubmit}>
+                <Form.Label>Description</Form.Label>
+                <Form.Control 
+                size="sm"
+                    as="input"
+                    name="description" 
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)} 
+                />
+                <Form.Label>Shopping Date</Form.Label>
+                <DatePicker selected={shoppingdate} onChange={date => setShoppingdate(date)} />
+                <Button type="submit">Save List</Button>
+            </Form>
+            </Col></Row>
+            <Row>
+                <Col><Catalog addItem={addItem} selectedItems={selectedItems}/></Col>
+                <Col><ListPreview description={description} shoppingdate={shoppingdate} selectedItems={selectedItems} /></Col>
+            </Row>
+        </Container>
     )
-
 }
 export default NewList

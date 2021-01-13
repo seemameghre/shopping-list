@@ -1,5 +1,7 @@
 import {useState} from "react"
-
+import InputGroup from "react-bootstrap/InputGroup"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
 import useInputState from "../hooks/useInputState"
 
 function Item(props){
@@ -21,16 +23,33 @@ function Item(props){
         resetQuantity()
         resetNote()
     }
+
     return(
-        <>
-            <form onSubmit={handleSubmit}>
-                <input type="checkbox" value={itemname} onChange={handleCheckbox}/>
-                <label htmlFor="{itemname}">{itemname}</label>
-                <input type="text" placeholder="Quantity" size="4" name="quantity" value={quantity} onChange={e => setQuantity(e)} disabled={!selected} />
-                <input type="text" placeholder="Note" size="8" name="note" value={note} onChange={e => setNote(e)} disabled={!selected} />
-                <button disabled={!selected}>+</button>
-            </form>
-        </>
+        <Form onSubmit={handleSubmit}>
+        <InputGroup size="sm" className="mb-3">
+            <InputGroup.Prepend>
+                <InputGroup.Checkbox onChange={handleCheckbox}/>
+                <Form.Label>{itemname}</Form.Label>
+            </InputGroup.Prepend>
+            <Form.Control placeholder="Qty" 
+                disabled={!selected} 
+                maxLength={4}
+                name="quantity" 
+                value={quantity} 
+                onChange={e => setQuantity(e)} 
+            />
+            <Form.Control placeholder="Note" 
+                disabled={!selected} 
+                maxLength={20}
+                name="note" 
+                value={note} 
+                onChange={e => setNote(e)} 
+            />
+            <InputGroup.Append>
+                <Button disabled={!selected} variant="secondary" type="submit">Add</Button>
+            </InputGroup.Append>
+        </InputGroup>
+        </Form>
     )
 }
 export default Item;
