@@ -20,8 +20,11 @@ connection.once('open', () => {
 
 const listRouter = require("./routes/list"); 
 const categoryRouter = require("./routes/category");
+const msgRouter = require("./routes/message")
+
 app.use('/lists',listRouter)
 app.use('/category',categoryRouter)
+app.use('/message',msgRouter)
 
 app.listen(port, () => {
     console.log("Server started at port "+port)

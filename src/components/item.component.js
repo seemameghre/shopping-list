@@ -3,6 +3,7 @@ import InputGroup from "react-bootstrap/InputGroup"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import useInputState from "../hooks/useInputState"
+import {uuid} from "uuidv4"
 
 function Item(props){
     const itemname = props.name
@@ -16,6 +17,7 @@ function Item(props){
     function handleSubmit(e){
         e.preventDefault()
         props.addItem({
+            id:uuid(),
             itemname,
             quantity,
             note
